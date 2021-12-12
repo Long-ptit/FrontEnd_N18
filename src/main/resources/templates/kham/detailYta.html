@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LTW PTIT N18</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/weblayout/tablestyle.css">
+</head>
+<body>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Danh sách y tá tham gia trợ giúp</h2>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>số điện thoại</th>
+                <th>Bác sĩ</th>
+                <th>Bệnh nhân</th>
+                <th>Bệnh</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            <tr th:each="hotro : ${hoTroList}">
+
+                <td th:text="${hotro.yta.id}"></td>
+                <td th:text="${hotro.yta.ytaTen}"></td>
+                <td th:text="${hotro.yta.ytaSDT}"></td>
+                <td th:text="${hotro.kham.bacSy.bacsyTen}"></td>
+                <td th:text="${hotro.kham.benhNhan.ten}"></td>
+                <td th:text="${hotro.kham.benh.ten}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Delete Modal HTML -->
+</body>
+</html>

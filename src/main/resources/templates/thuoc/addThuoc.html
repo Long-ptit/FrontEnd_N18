@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>Thêm Thuốc</title>
+</head>
+<body>
+<div class="container">
+  <h2>Thêm Thuốc</h2>
+  <p style="font-size: 40px; color: black">Điền thông tin thuốc để thêm</p>
+  <form method="post" th:action="@{/thuoc/save}" th:object="${thuoc}">
+
+    <div class="form-group">
+      <label>Giá:</label>
+      <input type="text" class="form-control" th:field="*{gia}" />
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('gia')}" th:errors="*{gia}"></div>
+
+    </div>
+
+    <div class="form-group">
+      <label>Tên Thuốc:</label>
+      <input type="text" class="form-control" th:field="*{ten}"/>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}"></div>
+
+    </div>
+
+    <div class="form-group">
+      <label>Công dụng:</label>
+      <input type="text" class="form-control" th:field="*{congDung}" />
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('congDung')}" th:errors="*{congDung}"></div>
+
+    </div>
+
+    <div class="form-group">
+      <label>Loại Thuốc:</label>
+      <input type="text" class="form-control" th:field="*{loaiThuoc}"/>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('loaiThuoc')}" th:errors="*{loaiThuoc}"></div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm Thuốc</button>
+  </form>
+</div>
+
+</body>
+</html>

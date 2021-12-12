@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Thêm hồ sơ khám</title>
+</head>
+<body>
+<div class="container">
+    <h2>Thêm hồ sơ khám</h2>
+    <p style="font-size: 40px; color: black">Điền thông tin hồ sơ khám để thêm</p>
+    <form method="post" th:action="@{/kham/saveEdit}" th:object="${kham}">
+        <input type="hidden" th:field="*{id}">
+        <div>
+            <label>Ngày vào:</label>
+            <input type="text" class="form-control" th:field="*{datein}">
+        </div>
+        <div class="form-group">
+            <label>Ngày ra:</label>
+            <input type="text" class="form-control" th:field="*{dateout}"/>
+        </div>
+        <div class="form-group">
+            <label>kiểu:</label>
+            <input type="text" class="form-control" th:field="*{type}"/>
+        </div>
+        <div class="form-group">
+            <label>Kết luận:</label>
+            <input type="text" class="form-control" th:field="*{status}"/>
+        </div>
+
+        <div class="form-group">
+            <label>Tổng phí khám:</label>
+            <input type="text" class="form-control" th:field="*{tongTien}"/>
+        </div>
+        <div>
+            <label>Tên bác sỹ:</label>
+            <select th:field="*{bacSy.id}">
+                <option th:each="bs: ${listBacsi}" th:value="${bs.id}" th:text="${bs.bacsyTen}"></option>
+            </select>
+        </div>
+
+        <div>
+            <label>Tên bệnh:</label>
+            <select th:field="*{benh.id}">
+                <option th:each="benh: ${listBenh}" th:value="${benh.id}" th:text="${benh.ten}"></option>
+            </select>
+        </div>
+
+        <div>
+            <label>Tên bệnh nhân:</label>
+            <select th:field="*{benhNhan.id}">
+                <option th:each="benhnhan: ${listBenhNhan}" th:value="${benhnhan.id}" th:text="${benhnhan.ten}"></option>
+            </select>
+        </div>
+
+
+
+
+
+
+        <h3>Xác định y tá:</h3>
+        <div th:each="item: ${listYta}">
+            <input name="idYta" type="checkbox"
+                   th:value="${item.id}"/> <span th:text="${item.ytaTen}">Hâyz</span><br/>
+        </div>
+
+
+        <h3>Đơn thuôc:</h3>
+        <h4>chọn các loại thuôc:</h4>
+        <div th:each="item: ${listThuoc}">
+            <input name="idThuoc" type="checkbox"
+                   th:value="${item.id}"/> <span th:text="${item.ten}">Hâyz</span><br/>
+            <label> Nhập số lượng </label>
+            <input name="soLuong" > </span><br/>
+        </div>
+        <input name="idThuoc" type="hidden" th:value="a">
+
+
+        <button type="submit" class="btn btn-success">Thêm hồ sơ khám</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <title>Thống kê chi tiết bệnh</title>
+</head>
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+    }
+
+</style>
+<body style="background-color: #4afdfd;">
+<h2 style="text-align: center;">Thống kê chi tiết bệnh</h2>
+
+<table  style="border: 5px; margin: auto">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Tên bác sĩ</th>
+        <th>Tên bệnh nhân</th>
+        <th>Tên bệnh</th>
+        <th>Loại</th>
+        <th>Kết luận</th>
+        <th>Ngày vào</th>
+        <th>Ngày ra</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+
+    <tr th:each="kham : ${listKham}">
+
+        <td th:text="${kham.id}"></td>
+        <td th:text="${kham.bacSy.bacsyTen}"></td>
+        <td th:text="${kham.benhNhan.ten}"></td>
+        <td th:text="${kham.benh.ten}"></td>
+        <td th:text="${kham.type}"></td>
+        <td th:text="${kham.status}"></td>
+        <td th:text="${kham.datein}"></td>
+        <td th:text="${kham.dateout}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

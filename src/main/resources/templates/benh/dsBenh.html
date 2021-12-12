@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/weblayout/tablestyle.css">
+</head>
+<body>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Quản lí Bệnh</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a th:href="@{/}" class="btn btn-info"><i class='bx bx-home'></i><span>Home</span></a>
+                    <a th:href="@{/benh/create}" class="btn btn-success"><i class='bx bx-add-to-queue' ></i><span>Thêm Bệnh</span></a>
+                </div>
+            </div>
+        </div>
+        <form th:action="@{/benh/search}" method="get">
+            <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" placeholder="Tìm kiếm theo tên bệnh" id="txtSearch" name="key"/>
+                        <div class="input-group-btn">
+                            <button  class="btn btn-success" type="submit" >
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Mô Tả</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="t: ${listBenh}">
+                <td th:text="${t.id}"></td>
+                <td th:text="${t.ten}"></td>
+                <td th:text="${t.moTa}"></td>
+                <td>
+                    <a th:href="@{/benh/update(id=${t.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                    <a th:href="@{/benh/delete(id=${t.id})}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Delete Modal HTML -->
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Thêm bác sĩ</title>
+</head>
+<body>
+<div class="container">
+    <h2>Sửa bác sĩ</h2>
+    <p style="font-size: 40px; color: black">Điền thông tin bác sĩ để sửa</p>
+    <form method="post" th:action="@{/bacsi/saveEdit}" th:object="${bacsi}">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label>Chứng minh thư:</label>
+            <input type="text" class="form-control" th:field="*{bacsyCMT}">
+        </div>
+        <div class="form-group">
+            <label>Thâm niên:</label>
+            <input type="text" class="form-control" th:field="*{bacsyThamNien}">
+        </div>
+        <div class="form-group">
+            <label>Tên:</label>
+            <input type="text" class="form-control" th:field="*{bacsyTen}">
+        </div>
+        <div class="form-group">
+            <label>Số điện thoại:</label>
+            <input type="text" class="form-control" th:field="*{bacsySDT}">
+        </div>
+        <div class="form-group">
+            <label>Địa chỉ:</label>
+            <input type="text" class="form-control" th:field="*{bacsyDiaChi}">
+        </div>
+        <div class="form-group">
+            <label>Ngày sinh:</label>
+            <input type="text" class="form-control" th:field="*{bacsyNgaySinh}">
+        </div>
+        <div class="form-group">
+            <label>Bậc nghề:</label>
+            <input type="text" class="form-control" th:field="*{bacsyBacNghe}">
+        </div>
+        <div class="form-group">
+            <label>Trình độ:</label>
+            <input type="text" class="form-control" th:field="*{bacsyTrinhDoDaoTao}">
+        </div>
+        <div class="form-group">
+            <label>Chuyên môn:</label>
+            <input type="text" class="form-control" th:field="*{bacsyChuyenMon}">
+        </div>
+        <button type="submit" class="btn btn-success">Lưu thông tin bác sĩ</button>
+    </form>
+</div>
+
+</body>
+</html>

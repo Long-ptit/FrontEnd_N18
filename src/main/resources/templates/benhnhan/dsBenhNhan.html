@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LTW PTIT N18</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/weblayout/tablestyle.css">
+</head>
+<body>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Quản lí bệnh nhân</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a th:href="@{/}" class="btn btn-info"><i class='bx bx-home'></i><span>Home</span></a>
+                    <a th:href="@{/benhnhan/create}" class="btn btn-success"><i class='bx bx-add-to-queue' ></i><span>Thêm bệnh nhân</span></a>
+                </div>
+
+            </div>
+        </div>
+        <form th:action="@{/benhnhan/search}" method="get">
+            <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm theo tên bệnh nhân" id="txtSearch" name="keyword"/>
+                        <div class="input-group-btn">
+                            <button  class="btn btn-success" type="submit" >
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            <tr th:each="benhnhan : ${listBenhNhan}">
+                <td th:text="${benhnhan.id}"></td>
+                <td th:text="${benhnhan.ten}"></td>
+                <td th:text="${benhnhan.ngaySinh}"></td>
+                <td th:text="${benhnhan.diaChi}"></td>
+                <td th:text="${benhnhan.sdt}"></td>
+                <td>
+                    <a th:href="@{/benhnhan/update(id=${benhnhan.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                    <a th:href="@{/benhnhan/delete(id=${benhnhan.id})}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

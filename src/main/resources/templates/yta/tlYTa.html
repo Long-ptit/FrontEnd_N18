@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LTW PTIT N18</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/weblayout/tablestyle.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Tính lương y tá</h2>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <a th:href="@{/}" class="btn btn-info"><i class='bx bx-home'></i><span>Home</span></a>
+        </div>
+    </div>
+    <form th:action="@{/tinhluong/yta/result}" method="get">
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="YYYY-MM" id="txtSearch" name="keyword" th:value="${keyword}"/>
+                    <div class="input-group-btn">
+                        <button  class="btn btn-success" type="submit" >
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>ID khám</th>
+                <th>Tên</th>
+                <th>Chứng minh thư</th>
+                <th>Ngày sinh</th>
+                <th>Lương cơ bản</th>
+                <th>Số lần trợ giúp</th>
+                <th>Lương cộng thêm</th>
+                <th>Lương tổng</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            <tr th:each="luong : ${luongYTaList}">
+                <td th:text="${luong.id}"></td>
+                <td th:text="${luong.ytaTen}"></td>
+                <td th:text="${luong.ytaCMT}"></td>
+                <td th:text="${luong.ytaNgaySinh}"></td>
+                <td th:text="${luong.luongCoBan}"></td>
+                <td th:text="${luong.soLan}"></td>
+                <td th:text="${luong.luongCongThem}"></td>
+                <td th:text="${luong.luongTong}"></td>
+                <td>
+                    <a th:href="@{/tinhluong/yta/detail(id=${luong.id}, keyword=${keyword})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Click to view detail">&#xE254;</i></a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Delete Modal HTML -->
+</body>
+</html>

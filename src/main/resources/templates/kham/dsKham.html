@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LTW PTIT N18</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/weblayout/tablestyle.css">
+<body>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Quản lí hồ sơ khám</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a th:href="@{/}" class="btn btn-info"><i class='bx bx-home'></i><span>Home</span></a>
+                    <a th:href="@{/kham/create}" class="btn btn-success"><i class='bx bx-add-to-queue' ></i><span>Thêm hồ sơ khám</span></a>
+                </div>
+            </div>
+        </div>
+        <form th:action="@{/kham/search}" method="get">
+            <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm theo id bệnh nhân" id="txtSearch" name="keyword"/>
+                        <div class="input-group-btn">
+                            <button  class="btn btn-success" type="submit" >
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ngày vào</th>
+                <th>Ngày ra</th>
+                <th>Loại</th>
+                <th>Kết luận</th>
+                <th>Id bác sĩ</th>
+                <th>Tên bác sĩ</th>
+                <th>Id bệnh nhân</th>
+                <th>Tên bệnh nhân</th>
+                <th>Id bệnh</th>
+                <th>Tên bệnh</th>
+                <th>Tổng giá tiền</th>
+                <th>Xem đơn thuốc</th>
+                <th>Ds y tá</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            <tr th:each="kham : ${listKham}">
+
+                <td th:text="${kham.id}"></td>
+                <td th:text="${kham.datein}"></td>
+                <td th:text="${kham.dateout}"></td>
+                <td th:text="${kham.type}"></td>
+                <td th:text="${kham.status}"></td>
+                <td th:text="${kham.bacSy.id}"></td>
+                <td th:text="${kham.bacSy.bacsyTen}"></td>
+                <td th:text="${kham.benhNhan.id}"></td>
+                <td th:text="${kham.benhNhan.ten}"></td>
+                <td th:text="${kham.benh.id}"></td>
+                <td th:text="${kham.benh.ten}"></td>
+                <td th:text="${kham.tongTien} + ' vnd'"></td>
+
+                <td>
+                    <a th:href="@{/kham/viewDonThuoc(id=${kham.id})}" class="btn btn-primary"  role="button">Xem</a>
+                </td>
+                <td>
+                    <a th:href="@{/kham/viewYta(id=${kham.id})}" class="btn btn-primary" role="button">Xem</a>
+                </td>
+                <td>
+                    <a th:href="@{/kham/edit(id=${kham.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit Kham">&#xE254;</i></a>
+                    <a th:href="@{/kham/delete(id=${kham.id})}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete Kham">&#xE872;</i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Delete Modal HTML -->
+
+</body>
+</html>

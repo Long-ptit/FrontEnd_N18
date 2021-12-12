@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LTW PTIT N18</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/weblayout/tablestyle.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Chi tiết lần bác sĩ chữa</h2>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Id khám</th>
+                <th>Id bác sĩ</th>
+                <th>Tên bác sỹ</th>
+                <th>Ngày vào</th>
+                <th>Ngày ra</th>
+                <th>Id bệnh nhân</th>
+                <th>Tên bệnh nhân</th>
+                <th>Id bệnh</th>
+                <th>Tên bệnh</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <tr th:each="kham : ${listKham}">
+                <td th:text="${kham.id}"></td>
+                <td th:text="${kham.bacSy.id}"></td>
+                <td th:text="${kham.bacSy.bacsyTen}"></td>
+                <td th:text="${kham.datein}"></td>
+                <td th:text="${kham.dateout}"></td>
+                <td th:text="${kham.benhNhan.id}"></td>
+                <td th:text="${kham.benhNhan.ten}"></td>
+                <td th:text="${kham.benh.id}"></td>
+                <td th:text="${kham.benh.ten}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

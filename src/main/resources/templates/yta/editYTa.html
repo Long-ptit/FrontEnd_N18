@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Thêm y tá</title>
+</head>
+<body>
+<div class="container">
+    <h2>Thêm y tá</h2>
+    <p style="font-size: 40px; color: black">Điền thông tin y tá để sửa</p>
+    <form method="post" th:action="@{/yta/saveEdit}" th:object="${yta}">
+        <input type="hidden" th:field="*{id}">
+        <div >
+            <label>Tên:</label>
+            <input type="text" class="form-control" th:field="*{ytaTen}">
+        </div>
+        <div class="form-group">
+            <label>Chứng minh thư:</label>
+            <input type="text" class="form-control" th:field="*{ytaCMT}"/>
+        </div>
+        <div class="form-group">
+            <label>Ngày sinh:</label>
+            <input type="text" class="form-control" th:field="*{ytaNgaySinh}"/>
+        </div>
+        <div class="form-group">
+            <label>Địa Chỉ:</label>
+            <input type="text" class="form-control" th:field="*{ytaDiaChi}"/>
+        </div>
+        <div class="form-group">
+            <label>Số điện thoại:</label>
+            <input type="text" class="form-control" th:field="*{ytaSDT}"/>
+        </div>
+        <div class="form-group">
+            <label>Thâm niên:</label>
+            <input type="text" class="form-control" th:field="*{ytaThamNien}"/>
+        </div>
+        <button type="submit" class="btn btn-success">Lưu y tá</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>
