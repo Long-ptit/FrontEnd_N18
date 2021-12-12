@@ -73,6 +73,7 @@ public class BacSiController {
     @GetMapping("/search")
     public String search(@RequestParam("keyword123") String keyword,Model model)
     {
+        keyword = keyword.trim();
         if (keyword.equals(""))  return "redirect:/bacsi/current";
         List<BacSi> bacSiList = Arrays.asList(rest.getForObject("http://localhost:8080/bacsi/search/{keyword}",BacSi[].class, keyword));
         model.addAttribute("listBacSi", bacSiList);

@@ -44,6 +44,8 @@ public class ThongKeBenhController {
     @GetMapping("/result")
     public String getDetailBenh(@RequestParam("id") String id,@RequestParam("keyword") String keyword, Model model) {
         System.out.println(keyword);
+        keyword = keyword.trim();
+        if (keyword.equals("")) return "redirect:tk/benh";
         List<Kham> listKham = Arrays.asList(rest.getForObject(url+"/kham/tk/benh/{keyword}/{id}", Kham[].class, keyword, id));
         model.addAttribute("listKham", listKham);
         return "thongke/tkBenhDetail";

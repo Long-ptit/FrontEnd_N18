@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <h2>Thêm bệnh nhân</h2>
-    <p style="font-size: 40px; color: black">Điền thông tin y tá để sửa</p>
+    <p style="font-size: 40px; color: black">Điền thông tin bệnh nhân để sửa</p>
     <form method="post" th:action="@{/benhnhan/saveEdit}" th:object="${benhnhan}">
         <input type="hidden" th:field="*{id}">
         <div >

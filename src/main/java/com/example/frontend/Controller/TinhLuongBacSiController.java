@@ -31,6 +31,8 @@ public class TinhLuongBacSiController {
 
     @GetMapping("/result")
     public String getFormResult(@RequestParam("keyword") String keyword, Model model) {
+        keyword = keyword.trim();
+        if (keyword.equals(""))  return "redirect:/tinhluong/bacsy";
         List<LuongBacSi> luongBacSiList = Arrays.asList(rest.getForObject(url+"/kham/tl/bacsi/{keyword}", LuongBacSi[].class, keyword));
         model.addAttribute("luongBacSiList", luongBacSiList);
         model.addAttribute("keyword", keyword);
@@ -39,6 +41,8 @@ public class TinhLuongBacSiController {
 
     @GetMapping("/detail")
     public String showDetail(Model model, @RequestParam("keyword") String keyword,@RequestParam("id") String id) {
+        keyword = keyword.trim();
+        if (keyword.equals(""))  return "redirect:/tinhluong/bacsy";
         List<Kham> khamList = Arrays.asList(rest.getForObject(url+"/kham/tk/bacsy/{keyword}/{id}", Kham[].class, keyword, id));
         model.addAttribute("listKham", khamList);
         return "bacsi/tlBacSyResult";

@@ -69,6 +69,7 @@ public class YTaController {
 
     @GetMapping("/search")
     public String search(@RequestParam("keywordabc") String keyword, Model model) {
+        keyword = keyword.trim();
         if (keyword.equals(""))  return "redirect:/yta/current";
         List<Yta> ytaList = Arrays.asList(rest.getForObject("http://localhost:8080/yta/search/{keyword}", Yta[].class, keyword));
         model.addAttribute("listYta", ytaList);

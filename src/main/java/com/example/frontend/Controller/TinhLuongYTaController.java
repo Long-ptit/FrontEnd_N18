@@ -32,6 +32,8 @@ public class TinhLuongYTaController {
 
     @GetMapping("/result")
     public String showDsLuongYta(Model model, @RequestParam("keyword") String keyword) {
+        keyword = keyword.trim();
+        if (keyword.equals(""))  return "redirect:/tinhluong/yta";
         List<LuongYTa> luongYTaList = Arrays.asList(rest.getForObject(url + "/hotro/tl/yta/{keyword}", LuongYTa[].class, keyword));
         model.addAttribute("luongYTaList", luongYTaList);
         model.addAttribute("keyword", keyword);
@@ -40,6 +42,8 @@ public class TinhLuongYTaController {
 
     @GetMapping("/detail")
     public String showDetailLuong(Model model, @RequestParam("keyword") String keyword,@RequestParam("id") String id ) {
+        keyword = keyword.trim();
+        if (keyword.equals(""))  return "redirect:/tinhluong/yta";
         List<HoTro> listHoTro = Arrays.asList(rest.getForObject(url + "/hotro/tk/yta/{keyword}/{id}", HoTro[].class, keyword, id));
         Yta yta = rest.getForObject(url + "/yta/{id}", Yta.class, id);
         model.addAttribute("listHoTro", listHoTro);

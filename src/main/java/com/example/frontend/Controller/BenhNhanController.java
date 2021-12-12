@@ -72,6 +72,7 @@ public class BenhNhanController {
 
     @GetMapping("/search")
     public String search(@RequestParam("keyword") String keyword,Model model) {
+        keyword = keyword.trim();
         System.out.println("keyword"  + keyword);
         if (keyword.equals("")) return "redirect:/benhnhan/current";
         List<BenhNhan> benhNhanList = Arrays.asList(rest.getForObject("http://localhost:8080/benhnhan/search/{keyword}", BenhNhan[].class, keyword));

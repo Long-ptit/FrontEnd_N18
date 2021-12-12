@@ -221,6 +221,8 @@ public class KhamController {
 
     @GetMapping("/search")
     public String searchKhamTheoIdNguoiDung(Model model,@RequestParam("keyword") String keyword) {
+        keyword = keyword.trim();
+        if (keyword.equals("")) return "redirect:/kham/";
         List<Kham> listKham = Arrays.asList(rest.getForObject(url+"/kham/bn/{id}",Kham[].class, keyword));
         model.addAttribute("listKham", listKham);
         return "kham/dsKham";
