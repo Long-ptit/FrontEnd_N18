@@ -16,7 +16,7 @@
     <form method="post" th:action="@{/yta/save}" th:object="${yta}">
         <div >
             <label>Tên:</label>
-            <input type="text" class="form-control" th:field="*{ytaTen}">
+            <input type="text"  class="form-control" th:field="*{ytaTen}">
             <div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('ytaTen')}" th:errors="*{ytaTen}"></div>
         </div>
         <div class="form-group">
@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             <label>Ngày sinh:</label>
-            <input type="text" class="form-control" th:field="*{ytaNgaySinh}"/>
+            <input type="text" placeholder="YYYY-MM-DD" class="form-control" th:field="*{ytaNgaySinh}"/>
             <div class="alert alert-danger" role="alert"  th:if="${#fields.hasErrors('ytaNgaySinh')}" th:errors="*{ytaNgaySinh}"></div>
         </div>
         <div class="form-group">

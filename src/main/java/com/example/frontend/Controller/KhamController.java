@@ -43,12 +43,10 @@ public class KhamController {
     }
 
     @PostMapping("/save")
-    public String saveKham(@Valid @ModelAttribute("kham") Kham kham, @RequestParam("idYta") String idYta, @RequestParam("idThuoc") String idThuoc, @RequestParam("soLuong") String soLuong, Errors errors) {
-        if(errors.hasErrors()) return "kham/addKham";
-
-        System.out.println("thuoc id " + idThuoc);//a,x,x
-        System.out.println("soluong" +soLuong);
-
+    public String saveKham(Kham kham, @RequestParam("idYta") String idYta, @RequestParam("idThuoc") String idThuoc, @RequestParam("soLuong") String soLuong) {
+        System.out.println("idYta " + idYta);
+        System.out.println("idThuoc " + idThuoc);
+        System.out.println("soLuong " + soLuong);
 
         List<Yta> ytaList = new ArrayList<>();
         for(String i: idYta.split(",") ) {
@@ -56,6 +54,8 @@ public class KhamController {
             ytaList.add(yTa);
         }
         Kham a = rest.postForObject(url+"/kham", kham, Kham.class);
+
+        //tạo các hỗ trợ của y tá
         for(int i = 0; i< ytaList.size() ; i++) {
             HoTro hoTro = new HoTro();
             Yta yta1 = ytaList.get(i);
@@ -63,32 +63,25 @@ public class KhamController {
             hoTro.setYta(yta1);
             rest.postForObject(url + "/hotro",hoTro , HoTro.class);
         }
+
+        //lấy ra list các số lượng
         List<Integer> soLuongThuoc = new ArrayList<>();
-        List<String> listSoluong = Arrays.asList(soLuong.split(","));
-        for (int i=0 ; i<listSoluong.size() ; i++) {
-            if(!listSoluong.get(i).equals("")) {
-                soLuongThuoc.add(Integer.valueOf(listSoluong.get(i)));
+        for(String i: soLuong.split(",")) {
+            if(!i.equals("")) {
+                soLuongThuoc.add(Integer.valueOf(i));
             }
         }
 
+
+        //lấy ra list thuốc
         List<Thuoc> listThuoc = new ArrayList<>();
-//        if( idThuoc.length() == 1) return "redirect:/kham/";
-//        if( soLuong.length() == 0) return "redirect:/kham/";
-        //trừ đi kí tự check null
-       if(idThuoc.length() != 1)  idThuoc = idThuoc.substring(0, idThuoc.length()-2);
-        List<String> listIdThuocc = Arrays.asList(idThuoc.split(","));
-        System.out.println("hehe"+listIdThuocc.get(0));
-        List<String> listIdThuocc1 = new ArrayList<>();
-        for(int i=0 ; i<listIdThuocc.size() ; i++) {
-            if(!listIdThuocc.get(i).equals("") && !listIdThuocc.get(i).equals("a")) {
-                System.out.println("vl"+listIdThuocc.get(i));
-                System.out.println("add");
-                listIdThuocc1.add((listIdThuocc.get(i)));
+        for(String i: idThuoc.split(",")) {
+            if(!i.equals("") && !i.equals("a")) {
+                listThuoc.add(rest.getForObject(url+"/thuoc/get-thuoc/{id}",Thuoc.class,i));
             }
         }
-        for( int i=0 ; i<listIdThuocc1.size() ; i++) {
-            listThuoc.add(rest.getForObject(url+"/thuoc/get-thuoc/{id}",Thuoc.class, listIdThuocc1.get(i)));
-        }
+
+
         int tongTien = 0;
         for( int i=0 ; i<listThuoc.size() ; i++) {
             int gia = listThuoc.get(i).getGia()*soLuongThuoc.get(i);
@@ -133,14 +126,6 @@ public class KhamController {
 
     @PostMapping("/saveEdit")
     public String saveEditKham(Kham kham,@RequestParam("idYta") String idYta,@RequestParam("idThuoc") String idThuoc, @RequestParam("soLuong") String soLuong) {
-        List<Integer> soLuongThuoc = new ArrayList<>();
-        List<String> listSoluong = Arrays.asList(soLuong.split(","));
-        for (int i=0 ; i<listSoluong.size() ; i++) {
-            if(!listSoluong.get(i).equals("")) {
-                soLuongThuoc.add(Integer.valueOf(listSoluong.get(i)));
-            }
-        }
-
         List<Yta> ytaList = new ArrayList<>();
         for(String i: idYta.split(",") ) {
             Yta yTa = rest.getForObject(url+ "/yta/{id}", Yta.class, i);
@@ -162,11 +147,19 @@ public class KhamController {
         donThuoc1.setTongTien(0);
         List<Thuoc> listThuoc = new ArrayList<>();
         rest.put(url+"/donthuoc/{id}", donThuoc1, donThuoc1.getId());
+
         // truong hop xóa hết thuôc, đã xóa không cần add thêm thuốc
         if( idThuoc.length() == 1) return "redirect:/kham/";
-        idThuoc = idThuoc.substring(0, idThuoc.length()-2);
-        for(String i : idThuoc.split(",")) {
-            listThuoc.add(rest.getForObject(url+"/thuoc/get-thuoc/{id}",Thuoc.class, Integer.valueOf(i)));
+        for(String i: idThuoc.split(",")) {
+            if(!i.equals("") && !i.equals("a")) {
+                listThuoc.add(rest.getForObject(url+"/thuoc/get-thuoc/{id}",Thuoc.class,i));
+            }
+        }
+        List<Integer> soLuongThuoc = new ArrayList<>();
+        for(String i: soLuong.split(",")) {
+            if(!i.equals("")) {
+                soLuongThuoc.add(Integer.valueOf(i));
+            }
         }
 
         System.out.println(a.getId());
